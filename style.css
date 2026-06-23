@@ -54,6 +54,7 @@ body {
   backface-visibility: hidden;
   border-radius: 12px;
   object-fit: cover;
+  background-color: rgb(142, 181, 216);
 }
 
 .frontFace {
