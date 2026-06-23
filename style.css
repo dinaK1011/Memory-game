@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #141e30, #243b55);
+  background: linear-gradient(to right, #2a1e57, #5d48aa);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -58,4 +58,15 @@ body {
 
 .frontFace {
   transform: rotateY(180deg);
+}
+
+h3{
+  color:rgb(141, 144, 165)
+}
+
+.gameThemeBtn{
+  padding: 5px;
+  margin: 3px;
+  border-radius: 15%;
+  background-color: rgb(151, 223, 201);
 }
