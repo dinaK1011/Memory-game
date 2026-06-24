@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!clickedButton) return;
     const selectedTheme = clickedButton.getAttribute('data-theme');
     console.log(`You selected ${selectedTheme} theme`);
+    fetchImgByTheme(selectedTheme);
   });
 });
 
@@ -26,7 +27,7 @@ const fetchImgByTheme = async (choosenTheme) => {
   let images = [];
   if(choosenTheme === 'dogs'){
     try{
-      const response = await fetch('https://dog.ceo/api/breeds/image/random/6');
+      const response = await fetch('https://dog.ceo/api/breeds/image/random');
       if(!response.ok) throw new Error('Failed at fetch dogs images');
       const data = await response.json();
       return data;
@@ -36,7 +37,7 @@ const fetchImgByTheme = async (choosenTheme) => {
       return;
     }
   }
-  if(choosenTheme === 'Harry Potter'){
+  if(choosenTheme === 'harryPotter'){
     try{
       const response = await fetch('https://hp-api.onrender.com/api/characters');
       if(!response.ok) throw new Error('Failed at fetch Harry Potter character images');
@@ -48,11 +49,12 @@ const fetchImgByTheme = async (choosenTheme) => {
       return;
     }
   }
-  if(choosenTheme === 'Country flags'){
+  if(choosenTheme === 'flags'){
     try{
-      const response = await fetch('https://api.restcountries.com/countries/v5?limit=1&pretty=1');
+      const response = await fetch('https://opencountries.netlify.app/api/v1/countries');
       if(!response.ok) throw new Error('Failed at fetch Country flags images');
       const data = await response.json();
+      const shuffledCountries = data.sort(() => 0.5 - Math.random()).slice(0, 6);
       return data;
     }
     catch(error){
@@ -60,4 +62,12 @@ const fetchImgByTheme = async (choosenTheme) => {
       return;
     }
   }
+  if(choosenTheme === 'random'){
+
+  }
 };
+
+const initGame = () => {
+  matchedCards = 0;
+  [firstCard, secondCard] = [null, null];
+}
