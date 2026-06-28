@@ -17,7 +17,6 @@ const initGame = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const gameDeck = document.querySelector('.memoryGame');
-  const Themebtns = document.querySelectorAll('.gameThemeBtn');
   const themeBox = document.querySelector('.chooseThemeBox div');
 
   gameDeck.addEventListener('click', (e) => {
@@ -103,10 +102,6 @@ const shuffleArr = (arr) => {
   }
 return arr;
 };
-
-//const shuffleAllDataCards = () => {
-
-//}
 
 const renderCards = (imgArr) => {
   const gameDeck = document.querySelector('.memoryGame');
