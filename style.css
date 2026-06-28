@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #2a1e57, #5d48aa);
+  background: linear-gradient(to right, #d3a561, #da6464, #5bbac7);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -54,7 +54,7 @@ body {
   backface-visibility: hidden;
   border-radius: 12px;
   object-fit: cover;
-  background-color: rgb(142, 181, 216);
+  background-color: rgb(178, 223, 224);
 }
 
 .frontFace {
@@ -62,12 +62,54 @@ body {
 }
 
 h3{
-  color:rgb(141, 144, 165)
+  color:rgb(1, 67, 83)
+}
+
+.choseThemeBox{
+  position: absolute;
+  top: 20px;
+  left: 30%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 10px;
+}
+
+.hidden {
+    display: none;
 }
 
 .gameThemeBtn{
-  padding: 5px;
+  padding: 10px 15px;
   margin: 3px;
-  border-radius: 15%;
-  background-color: rgb(151, 223, 201);
+  border-radius: 5px;
+  background-color: rgb(136, 178, 235);
+  border: none;
+  cursor: pointer;
+}
+
+#returnBtn{
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #657ad8; 
+  border: none;
+  border-radius: 5px;
+}
+
+.dogs
+.backFace{
+  background-color: rgb(235, 235, 151);
+}
+
+.harryPotter
+.backFace{
+  background-color: rgb(133, 28, 28);
+}
+
+.flags
+.backFace{
+  background-color: rgb(95, 158, 240);
 }

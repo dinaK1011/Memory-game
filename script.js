@@ -17,8 +17,9 @@ const initGame = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const gameDeck = document.querySelector('.memoryGame');
-  const themeBox = document.querySelector('.chooseThemeBox div');
-
+  const themeBox = document.querySelector('.choseThemeBox div');
+  const returnBtn = document.getElementById('returnBtn');
+  returnBtn.addEventListener('click', backToMenu);
   gameDeck.addEventListener('click', (e) => {
     const isCardClicked = e.target.closest(memoryCardSelector);
     if(!isCardClicked || lockBoard || isCardClicked.classList.contains(flipClass)){
@@ -31,12 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const isBtnClicked = e.target.closest('.gameThemeBtn');
     if(!isBtnClicked)
       return;
+    document.querySelector('.choseThemeBox').classList.add('hidden');
+    document.getElementById('returnBtn').classList.remove('hidden');
     const selectedTheme = isBtnClicked.getAttribute('data-theme');
-    initGame();
-    console.log(`You selected ${selectedTheme} theme`);
+    addStyleTheme(selectedTheme);
     fetchImgByTheme(selectedTheme);
+    initGame();
   });
 });
+
+const addStyleTheme = (theme) => {
+document.body.classList.remove('dogs', 'harryPotter', 'flags');
+document.body.classList.add(theme);
+}
 
 const fetchImgByTheme = async (chosenTheme) => {
   let images = [];
@@ -91,6 +99,7 @@ const fetchImgByTheme = async (chosenTheme) => {
   if(chosenTheme === 'random'){
     const randomTheme = Math.floor(Math.random() * THEMES.length);
     const fetchATheme = THEMES[randomTheme];
+    addStyleTheme(fetchATheme);
     return fetchImgByTheme(fetchATheme);
   }
   if (images.length === 0){
@@ -157,7 +166,6 @@ const flipCardsBack = () => {
   };
 
 const checkIFMatch = () => {
-  console.log('Comparing:', firstCard.dataset.card, 'with', secondCard.dataset.card);
   const isAMatch = firstCard.dataset.card === secondCard.dataset.card;
   isAMatch ? disableMatchedCards() : flipCardsBack();
 };
@@ -165,3 +173,11 @@ const resetTurn = () => {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
   };
+
+const backToMenu = () => {
+  document.querySelector('.choseThemeBox').classList.remove('hidden');
+  document.getElementById('returnBtn').classList.add('hidden');      
+  document.querySelector('.memoryGame').innerHTML = '';
+  matchedCards = 0;
+  resetTurn();
+}
