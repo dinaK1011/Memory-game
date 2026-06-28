@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-const fetchImgByTheme = async (choosenTheme) => {
+const fetchImgByTheme = async (chosenTheme) => {
   let images = [];
-  if(choosenTheme === 'dogs'){
+  if(chosenTheme === 'dogs'){
     try{
       const response = await fetch(`https://dog.ceo/api/breeds/image/random/${MAX_CARDS / 2}`);
       if(!response.ok) throw new Error('Failed at fetch dogs images');
@@ -52,19 +52,22 @@ const fetchImgByTheme = async (choosenTheme) => {
       return;
     }
   }
-  if(choosenTheme === 'harryPotter'){
+  if(chosenTheme === 'harryPotter'){
     try{
       const response = await fetch('https://hp-api.onrender.com/api/characters');
       if(!response.ok) throw new Error('Failed at fetch Harry Potter character images');
       const data = await response.json();
-      images = data.slice(0, 6).map((char, i) => ({ id: i, url: char.image }));
+      const imgOnly = data.filter(char => char.image);
+      images = shuffleArr(imgOnly)
+      .slice(0, 6)
+      .map((char, i) => ({ id: i, url: char.image }));
     }
     catch(error){
       console.error('An error in Harry Potter API',error.message);
       return;
     }
   }
-  if(choosenTheme === 'flags') {
+  if(chosenTheme === 'flags') {
     try {
       const response = await fetch('https://api.restcountries.com/countries/v5?limit=100', { 
         headers: { 'Authorization': 'Bearer rc_live_25c6b1137f4347edb30a60e0a8473ef0' } 
@@ -85,8 +88,10 @@ const fetchImgByTheme = async (choosenTheme) => {
       return;
     }
   }
-  if(choosenTheme === 'random'){
-
+  if(chosenTheme === 'random'){
+    const randomTheme = Math.floor(Math.random() * THEMES.length);
+    const fetchATheme = THEMES[randomTheme];
+    return fetchImgByTheme(fetchATheme);
   }
   if (images.length === 0){
     return;
